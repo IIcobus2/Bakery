@@ -1,0 +1,45 @@
+<!-- sldsValidatorIgnore -->
+<template>
+  <lightning-card  title="CLIENTE \{ClientName\}">
+    <div style="height: 300px;">
+      <lightning-datatable
+              key-field="id"
+              data={product}
+              show-row-number-column
+              hide-checkbox-column
+              columns={columns}>
+      </lightning-datatable>
+  </div>
+<div onkeyup={handleKeyUp}>
+    <lightning-input
+        name="enter-search"
+        label="Search for products and press 'ENTER':"
+        type="search"
+    ></lightning-input>
+</div>
+<template if:true={queryTerm}>
+    <p>Item selecionado: {queryTerm}</p>
+    <div class="slds-m-around--medium">
+      <lightning-button variant="brand" label="Add item" title="Add handled item to list" onclick={addItem} class="slds-m-left_x-small"></lightning-button>
+    </div>
+</template>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+</lightning-card>
+</template>
