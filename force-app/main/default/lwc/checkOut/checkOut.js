@@ -1,4 +1,4 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, track, wire } from 'lwc';
 import findRecords from '@salesforce/apex/LwcLookUpController.findRecords'
 
 const columns = [
@@ -7,39 +7,32 @@ const columns = [
 ];
 
 export default class BasicDatatable extends LightningElement {
-    product = [];
     columns = columns;
-    queryTerm = [];
+    lookUpProduct = '';
+    @track optionsProduct = [];
 
-    handleKeyUp(evt) {
-        const isEnterKey = evt.keyCode === 13;
-        if (isEnterKey) {
-            findRecords({searchKey: evt.target.value})
-            .then((result)=>{
-                // console.log(result);
-                if(result.length === 0){
-                    this.queryTerm = 'There is not product with this name!';
-                }else{
-                    this.queryTerm = result;
-                    console.log(this.queryTerm);
-                }
-                
-            })
-            .catch((error)=>{
-                this.queryTerm = [];
-                console.log(error);
-            })
-            // this.queryTerm = evt.target.value;
+    handleInputChange(evt) {
+        this.lookUpProduct = evt.target.value;
+        console.log(this.lookUpProduct); 
+    }
+
+    @wire(findRecords, {searchKey:'$lookUpProduct'})
+    retrievedItens({error, data}){
+        if(data){
+            
+            this.optionsProduct = data.product;
+        }else if(error){
+            console.log(error);
         }
     }
 
-    addItem(){
-        this.product[0] = this.queryTerm;
-        console.log(this.product);
-        
+    itemChosed(evt){
+        let searchProduct = this.template.querySelector('[data-js="searchProduct"]');
+        (searchProduct.value) = (evt.target.outerText);
     }
 
-    async connectedCallback() {
+    addItem(){
+            
         
     }
 }
