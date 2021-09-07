@@ -1,0 +1,4 @@
+<aura:component implements="force:hasRecordId,lightning:actionOverride,lightning:hasPageReference">
+  <aura:attribute name="recordId" type="String"/>    
+  <c:checkOut/>
+</aura:component>	

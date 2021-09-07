@@ -5,8 +5,6 @@ public with sharing class LwcLookUpController {
         string query = 'SELECT id, Name FROM Products__c WHERE Name LIKE '+searchText+'';
         List<Products__c> returnQuery = Database.query(query);
         System.debug(returnQuery);
-            
-
         
         
         List<Product> products = new List<Product>();
@@ -22,7 +20,32 @@ public with sharing class LwcLookUpController {
         return responsePro;
     }
 
-    
+    @AuraEnabled(cacheable=true)
+    public static Client getClient(String recordID){
+        Clients__c query = [SELECT Id, Name, RecordType.Name FROM Clients__c WHERE id  = :recordID];
+
+        Client client = new CLient(query.Id, query.Name, query.RecordType.Name);
+
+        System.debug(client);
+
+        return client;
+    }
+
+    public class Client{
+        @AuraEnabled
+        public String id;
+        @AuraEnabled
+        public String name;
+        @AuraEnabled
+        public String typeClient;
+
+        public Client(String id, String name, String typeClient){
+            this.id = id;
+            this.name = name;
+            this.typeClient = typeClient;
+        }
+    }
+
  
     public class ResponseProduct{
         @AuraEnabled

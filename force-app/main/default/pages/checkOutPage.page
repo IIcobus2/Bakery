@@ -1,0 +1,13 @@
+<apex:page standardController="Clients__c">
+  <apex:includeLightning />
+  <div id="lightning" />
+  <script>
+    $Lightning.use("c:checkOutApp", function () {
+        $Lightning.createComponent("c:checkOut", {
+            recordId : '{!$CurrentPage.parameters.id}'
+        }, "lightning", function (cmp) {
+            console.log("Nosso componente foi carregado!");
+        });
+    });
+</script>
+</apex:page>

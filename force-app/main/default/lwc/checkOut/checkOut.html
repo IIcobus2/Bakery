@@ -1,5 +1,5 @@
 <template>
-  <lightning-card  title="CLIENTE \{ClientName\}">
+  <lightning-card  title={title} icon-name="standard:partner_marketing_budget" >
     <div style="height: 300px;">
       <lightning-datatable
               key-field="id"
@@ -8,44 +8,39 @@
               hide-checkbox-column
               columns={columns}>
       </lightning-datatable>
-  </div>
-<!-- <div>
-    <lightning-input
-        type="search" onchange={handleInputChange} label="Search for an item:"
-    ></lightning-input>
-</div> -->
-<div class="slds-form-element">
-  <label class="slds-form-element__label" for="combobox-id-4" id="combobox-label-id-33">Relate To</label>
-  <div class="slds-form-element__control">
-    <div class="slds-combobox_container">
-      <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
-        
-        <div class="slds-combobox__form-element" role="none">
-        
-          <lightning-input
-          data-js="searchProduct" type="search" onchange={handleInputChange} label="Search for an item:">
-          </lightning-input>
-        
-        </div>
-        <div id="listbox-id-4" class="slds-dropdown slds-dropdown_fluid" role="listbox">
-          <ul onclick={itemChosed} key={product.id} class="slds-listbox slds-listbox_vertical" role="presentation" if:true={optionsProduct} for:each={optionsProduct} for:item="product" for:index="index">
+    </div>
+    <div class="slds-form-element">
+      <lightning-button variant="brand" label="Add Item" title="Add an item" onclick={addItem} class="slds-m-left_x-small"></lightning-button>
+      <div class="slds-form-element__control">
+        <div class="slds-combobox_container">
+          <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-closed" data-js="showCombobox" >
             
-            <li role="presentation" class="slds-listbox__item" > 
-              <div class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
-                <span class="slds-media__body">
-                  <span class="slds-media__body slds-listbox__option-text slds-listbox__option-text_entity">
-                    <span>
-                      {product.name}</span>
-                  </span>
-                </span>
-              </div>
-            </li>
-          </ul>
+            <div class="slds-combobox__form-element" role="none">
+            
+              <lightning-input
+              data-js="searchProduct" type="search" onchange={handleInputChange} label="Search for an item to add to your cart:">
+              </lightning-input>
+            
+            </div>
+            <div id="listbox-id-4" class="slds-dropdown slds-dropdown_fluid" role="listbox">
+              <ul onclick={itemChosed} key={product.id} class="slds-listbox slds-listbox_vertical" role="presentation" if:true={optionsProduct} for:each={optionsProduct} for:item="product" for:index="index">
+                
+                <li role="presentation" class="slds-listbox__item" > 
+                  <div class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                    <span class="slds-media__body">
+                      <span class="slds-media__body slds-listbox__option-text slds-listbox__option-text_entity">
+                        <span>
+                          {product.name}</span>
+                      </span>
+                    </span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 
     <br />
     <br />
@@ -62,7 +57,7 @@
     <br />
     <br />
     <br />
-    <br />
-    <br />
-</lightning-card>
+
+
+  </lightning-card>
 </template>
